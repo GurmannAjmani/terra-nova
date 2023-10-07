@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Operations</title>
+</head>
+<body>
+    <h1>Website</h1>
+    <textarea id="inputText" placeholder="Enter text"></textarea>
+    <button onclick="performOperations()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function performOperations() {
+            // Get the input hex-encoded text from the user
+            var inputHexText = document.getElementById("inputText").value;
+
+            try {
+                // Step 1: Convert hex to text
+                var hexToText = "";
+                for (var i = 0; i < inputHexText.length; i += 2) {
+                    hexToText += String.fromCharCode(parseInt(inputHexText.substr(i, 2), 16));
+                }
+
+                // Step 2: Reverse the text
+                var reversedText = hexToText.split('').reverse().join('');
+
+                // Step 3: Decode from base64
+                var decodedText = atob(reversedText);
+
+                // Display the result
+                document.getElementById("result").innerText = "Result: " + decodedText;
+            } catch (error) {
+                // Handle errors
+                document.getElementById("result").innerText = "Error.Invalid Input.";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
